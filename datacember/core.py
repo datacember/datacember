@@ -41,7 +41,7 @@ class datacember:
         pass
 
 
-def datacember_cursor(endpoint: str, sql: str, auth_token: str, debug=True):
+def datacember_cursor(endpoint: str, sql: str, auth_token: str, debug=False):
     response = requests.post(endpoint, json={"token": auth_token, "sql": sql})
     if response.status_code == 429:
         raise Exception("Rate limit. Exceeded 20 per minute")
