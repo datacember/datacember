@@ -1,0 +1,7 @@
+README.md
+setup.py
+datacember.egg-info/PKG-INFO
+datacember.egg-info/SOURCES.txt
+datacember.egg-info/dependency_links.txt
+datacember.egg-info/requires.txt
+datacember.egg-info/top_level.txt
