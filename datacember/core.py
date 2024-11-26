@@ -59,6 +59,7 @@ def datacember_cursor(url: str, sql: str, auth_token: str, debug=False):
 
 
 ## Example
+
 '''
 datacember = datacember("wingfooted", "password")
 with datacember as antartica:
