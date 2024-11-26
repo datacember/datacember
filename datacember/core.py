@@ -11,15 +11,15 @@ payload = {
 
 class datacember:
     def __init__(self, username: str, password: str,
-                 endpoint: str = 'http://127.0.0.1:8999', database='antartica'):
+                 url: str = 'http://127.0.0.1:8999', database='antartica'):
 
         self.username = username
         self.password = password
-        self.endpoint = endpoint
+        self.url = url
 
     def __enter__(self):
         response = requests.post(
-            self.endpoint+"/auth",
+            self.url+"/auth",
             json={
                 "username": self.username,
                 "password": self.password
@@ -30,7 +30,7 @@ class datacember:
             if response['auth']:
                 # minting a new token server side
                 auth_token = response['token']
-                return lambda sql: datacember_cursor(self.endpoint+'/sql',
+                return lambda sql: datacember_cursor(self.url+'/sql',
                                                      sql,
                                                      auth_token)
 
@@ -41,15 +41,15 @@ class datacember:
         pass
 
 
-def datacember_cursor(endpoint: str, sql: str, auth_token: str, debug=False):
-    response = requests.post(endpoint, json={"token": auth_token, "sql": sql})
+def datacember_cursor(url: str, sql: str, auth_token: str, debug=False):
+    response = requests.post(url, json={"token": auth_token, "sql": sql})
     if response.status_code == 429:
         raise Exception("Rate limit. Exceeded 20 per minute")
 
     response = response.json()
 
     if debug:
-        print(auth_token, endpoint)
+        print(auth_token, url)
 
     if 'error' in response:
         raise Exception(response['error'])
