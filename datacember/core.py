@@ -11,7 +11,7 @@ payload = {
 
 class datacember:
     def __init__(self, username: str, password: str,
-                 url: str = 'http://127.0.0.1:8999', database='antartica'):
+                 url: str = 'https://www.datacember.org', database='antartica'):
 
         self.username = username
         self.password = password
